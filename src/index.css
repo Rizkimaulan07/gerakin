@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #f3f5ec;
+  --foreground: #171b12;
+  --card: #ffffff;
+  --card-foreground: #171b12;
+  --popover: #ffffff;
+  --popover-foreground: #171b12;
+  --primary: #4f7508;
+  --primary-foreground: #ffffff;
+  --secondary: #e5e9dd;
+  --secondary-foreground: #252d1c;
+  --muted: #e6e9df;
+  --muted-foreground: #555e4b;
+  --accent: #c34a1d;
+  --accent-foreground: #ffffff;
+  --destructive: #e5484d;
+  --destructive-foreground: #ffffff;
+  --border: #cbd2c2;
+  --input: #cbd2c2;
+  --ring: #4f7508;
+  --chart-1: #4f7508;
+  --chart-2: #c34a1d;
+  --chart-3: #24796e;
+  --chart-4: #6554bb;
+  --chart-5: #9a6a00;
+  --radius: 1rem;
+  --sidebar: #edf0e7;
+  --sidebar-foreground: #171b12;
+}
+
+.dark {
+  --background: #0c0f09;
+  --foreground: #f2f5e9;
+  --card: #131710;
+  --card-foreground: #f2f5e9;
+  --popover: #181d14;
+  --popover-foreground: #f2f5e9;
+  --primary: #b6f240;
+  --primary-foreground: #17200a;
+  --secondary: #1d2418;
+  --secondary-foreground: #e9efdd;
+  --muted: #1b2116;
+  --muted-foreground: #97a18a;
+  --accent: #ff7a45;
+  --accent-foreground: #1d0d05;
+  --destructive: #ff6369;
+  --destructive-foreground: #21090b;
+  --border: #293123;
+  --input: #293123;
+  --ring: #b6f240;
+  --chart-1: #b6f240;
+  --chart-2: #ff7a45;
+  --chart-3: #52c7b8;
+  --chart-4: #9a8cff;
+  --chart-5: #f2c14e;
+  --sidebar: #0f130c;
+  --sidebar-foreground: #f2f5e9;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Space Grotesk', 'Plus Jakarta Sans', ui-sans-serif, sans-serif;
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  ::selection {
+    background: rgba(182, 242, 64, 0.3);
+    color: inherit;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 999px;
+    background-clip: padding-box;
+    background-color: rgba(151, 161, 138, 0.35);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(182, 242, 64, 0.55);
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.app-grid {
+  background-image:
+    linear-gradient(to right, rgba(151, 161, 138, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(151, 161, 138, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.hero-glow {
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(182, 242, 64, 0.18), transparent 48%),
+    radial-gradient(ellipse at 10% 100%, rgba(255, 107, 53, 0.12), transparent 42%);
+}
+
+.stat-number {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.045em;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes marker-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(182, 242, 64, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(182, 242, 64, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(182, 242, 64, 0);
+  }
+}
+
+.live-dot {
+  animation: marker-pulse 1.8s infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(16deg);
+  }
+  40% {
+    transform: rotate(-8deg);
+  }
+  60% {
+    transform: rotate(12deg);
+  }
+  80% {
+    transform: rotate(-4deg);
+  }
+}
+
+/* Leaflet */
+.leaflet-container {
+  background: #0f140d;
+  font-family: var(--font-sans);
+  z-index: 0;
+}
+
+.leaflet-control-attribution {
+  background: rgba(12, 15, 9, 0.72) !important;
+  color: #97a18a !important;
+  font-size: 9px !important;
+  backdrop-filter: blur(4px);
+}
+
+.leaflet-control-attribution a {
+  color: #b6f240 !important;
+}
+
+.leaflet-control-zoom a {
+  border-color: #293123 !important;
+  background: #131710 !important;
+  color: #f2f5e9 !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: #1d2418 !important;
+}
+
+.leaflet-tile-pane {
+  filter: saturate(0.8) contrast(1.05);
+}
