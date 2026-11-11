@@ -18,10 +18,14 @@ import {
 
 const { Client } = pg
 
-const dbName = process.env.PGDATABASE || 'gerakin'
+const connectionString = process.env.DATABASE_URL
 const reset = process.argv.includes('--reset')
 
-if (!/^[a-zA-Z0-9_]+$/.test(dbName)) {
+const dbName = connectionString
+  ? decodeURIComponent(new URL(connectionString).pathname.replace(/^\//, ''))
+  : process.env.PGDATABASE || 'gerakin'
+
+if (!connectionString && !/^[a-zA-Z0-9_]+$/.test(dbName)) {
   throw new Error('PGDATABASE hanya boleh berisi huruf, angka, dan garis bawah.')
 }
 
@@ -49,7 +53,9 @@ async function ensureDatabase() {
 }
 
 async function seedDatabase() {
-  const client = new Client({ ...baseConfig, database: dbName })
+  const client = connectionString
+    ? new Client({ connectionString })
+    : new Client({ ...baseConfig, database: dbName })
   await client.connect()
 
   try {
@@ -253,7 +259,7 @@ async function seedDatabase() {
 }
 
 try {
-  await ensureDatabase()
+  if (!connectionString) await ensureDatabase()
   await seedDatabase()
   console.log('PostgreSQL siap dipakai Gerakin.')
 } catch (error) {

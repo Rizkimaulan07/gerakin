@@ -3,14 +3,18 @@ import pg from 'pg'
 
 const { Pool } = pg
 
-const pool = new Pool({
-  host: process.env.PGHOST || '127.0.0.1',
-  port: Number(process.env.PGPORT || 5432),
-  user: process.env.PGUSER || 'postgres',
-  password: process.env.PGPASSWORD || '',
-  database: process.env.PGDATABASE || 'gerakin',
-  max: 10,
-})
+const connectionString = process.env.DATABASE_URL
+
+const pool = connectionString
+  ? new Pool({ connectionString, max: 10 })
+  : new Pool({
+      host: process.env.PGHOST || '127.0.0.1',
+      port: Number(process.env.PGPORT || 5432),
+      user: process.env.PGUSER || 'postgres',
+      password: process.env.PGPASSWORD || '',
+      database: process.env.PGDATABASE || 'gerakin',
+      max: 10,
+    })
 
 pool.on('error', (error) => {
   console.error('Koneksi PostgreSQL bermasalah:', error.message)
